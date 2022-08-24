@@ -1,11 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dtos.EmployeeDTO;
-import com.example.demo.entities.Department;
 import com.example.demo.entities.Employee;
-import com.example.demo.services.DepartmentService;
 import com.example.demo.services.EmployeeService;
-import com.example.demo.services.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +15,6 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private DepartmentService departmentService;
 
     @GetMapping(value = "/")
     public ResponseEntity<List<Employee>> getListEmployees() {
@@ -33,13 +28,13 @@ public class EmployeeController {
 
     @PostMapping(value = "/add")
     public ResponseEntity<Employee> insertEmployee(EmployeeDTO dto) {
-        Employee entity = new Employee(0L, dto.getName(), dto.getBirthDate(), dto.getGender(), departmentService.getOne(dto.getDeptId()));
+        Employee entity = new Employee(0L, dto.getName(), dto.getBirthDate(), dto.getGender(), null);
         return new ResponseEntity<>(employeeService.saveOrUpdate(entity), HttpStatus.OK);
     }
 
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, EmployeeDTO dto) {
-        Employee entity = new Employee(id, dto.getName(), dto.getBirthDate(), dto.getGender(), departmentService.getOne(dto.getDeptId()));
+        Employee entity = new Employee(id, dto.getName(), dto.getBirthDate(), dto.getGender(), null);
         return new ResponseEntity<>(employeeService.saveOrUpdate(entity), HttpStatus.OK);
     }
 

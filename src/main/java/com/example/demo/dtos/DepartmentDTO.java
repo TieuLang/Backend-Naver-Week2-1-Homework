@@ -1,10 +1,7 @@
 package com.example.demo.dtos;
 
-import com.example.demo.entities.Employee;
 import lombok.*;
 
-import javax.persistence.Column;
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +12,4 @@ public class DepartmentDTO {
 
     private String description;
 
-    private List<Employee> employeeDTOS;
 }
