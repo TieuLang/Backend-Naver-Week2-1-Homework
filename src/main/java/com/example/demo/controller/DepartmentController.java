@@ -26,12 +26,12 @@ public class DepartmentController {
     }
 
     @PostMapping(value="/add")
-    public ResponseEntity<Department> insertDepartment(DepartmentDTO dto) {
+    public ResponseEntity<Department> insertDepartment(@RequestBody DepartmentDTO dto) {
         Department entity = new Department(0L,dto.getName(),dto.getDescription(),null);
         return new ResponseEntity<>(departmentService.saveOrUpdate(entity), HttpStatus.OK);
     }
     @PutMapping(value="/edit/{id}")
-    public ResponseEntity<Department> updateDepartment(@PathVariable Long id,DepartmentDTO dto) {
+    public ResponseEntity<Department> updateDepartment(@PathVariable Long id,@RequestBody DepartmentDTO dto) {
         Department entity = new Department(id,dto.getName(),dto.getDescription(),null);
         return new ResponseEntity<>(departmentService.saveOrUpdate(entity), HttpStatus.OK);
     }

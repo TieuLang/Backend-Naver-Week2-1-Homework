@@ -27,13 +27,13 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<Employee> insertEmployee(EmployeeDTO dto) {
+    public ResponseEntity<Employee> insertEmployee(@RequestBody EmployeeDTO dto) {
         Employee entity = new Employee(0L, dto.getName(), dto.getBirthDate(), dto.getGender(), null);
         return new ResponseEntity<>(employeeService.saveOrUpdate(entity), HttpStatus.OK);
     }
 
     @PutMapping(value = "/edit/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, EmployeeDTO dto) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO dto) {
         Employee entity = new Employee(id, dto.getName(), dto.getBirthDate(), dto.getGender(), null);
         return new ResponseEntity<>(employeeService.saveOrUpdate(entity), HttpStatus.OK);
     }
